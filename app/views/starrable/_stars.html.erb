@@ -1,0 +1,6 @@
+<div class="rateit" data-rateableid="<%= @gallery.id %>" data-rateit-value="<%= @gallery.average_rating %>" data-rateit-ispreset="true"></div>
+<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+  <span itemprop="ratingValue"><%= starrable.average_rating %></span> stars out of
+  <span itemprop="bestRating"><%= starrable.max_rating %></span>
+  (<span itemprop="ratingCount"><%= pluralize(starrable.ratings.count, 'rating') %></span> total).
+</span>
