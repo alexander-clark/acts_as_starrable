@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     var value = ri.rateit('value');
     var rateableID = ri.data('rateableid');
-    var stype = 'Gallery';
+    var stype = window.starrable_type;
     if (window.rating != null) {
       $.ajax({
         url: '/ratings/' + window.rating + '.json',
@@ -29,7 +29,7 @@ $(document).ready(function() {
       $.ajax({
         url: '/ratings.json',
         data: { id: rateableID, value: value, stype: stype, rid: window.rater,
-                rtype: 'User' },
+                rtype: window.rater_type },
         type: 'POST',
         success: function(data) {
           window.rating = data['id'];

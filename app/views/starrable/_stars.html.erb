@@ -2,7 +2,9 @@
   <% rating = ActsAsStarrable::Rating.find(:first, :conditions => {:rater_type => 'User', :rater_id => current_user.id, :starrable_type => starrable.class, :starrable_id => starrable.id}) %>
   <%= javascript_tag do %>
     window.rater = '<%= current_user.id %>';
+    window.rater_type = '<%= current_user.class %>';
     window.rating = <%= rating ? rating.id : 'null' %>;
+    window.starrable_type = '<%= starrable.class %>';
   <% end %>
 <% end %>
 <% if rating %>
