@@ -1,35 +1,41 @@
 $(document).ready(function() {
-  // $.getJSON('products/124.json', function(data) {
-  //   $("div[data-productid=423]").attr('data-rateit-value', data.average_rating / 2);
-  //   $("div[data-productid=423]").attr('data-rateit-ispreset', true);
-  //   /*var items = [];
-  //   $.each(data, function(key, val) {
-  //     items.push('<li id=""' + key + '">' + val + '</li>');
-  //   });*/
-  // });
+  console.log('r: ' + window.rating);
+  $('.rateit').bind('reset', function(e) {
+    var ri = $(this);
 
-	$('.rateit').bind('rated reset', function (e) {
-		console.log("hello");
-		var ri = $(this);
+    $.ajax({
+      url: '/ratings/' + window.rating + '.json',
+      type: 'DELETE',
+      success: function(data) {
+        window.rating = null;
+        ri.rateit('resetable', false);
+      }
+    });
+  });
 
-	  //if the use pressed reset, it will get value: 0 (to be compatible with the HTML range control), we could check if e.type == 'reset', and then set the value to  null .
-	  var value = ri.rateit('value');
-	  var rateableID = ri.data('rateableid'); // if the product id was in some hidden field: ri.closest('li').find('input[name="productid"]').val()
-		var stype = 'Gallery';
+  $('.rateit').bind('rated', function(e) {
+    var ri = $(this);
 
-	  //maybe we want to disable voting?
-	  //ri.rateit('readonly', true);
-
-	  $.ajax({
-	    url: '/starrable/ratings.json', //your server side script
-	    data: { id: rateableID, value: value, stype: stype }, //our data
-	    type: 'POST',
-	    success: function (data) {
-	      //$('#response').append('<li>' + data + '</li>');
-	    },
-	    error: function (jxhr, msg, err) {
-	      //$('#response').append('<li style="color:red">' + msg + '</li>');
-	    }
-	  });
-	});
+    var value = ri.rateit('value');
+    var rateableID = ri.data('rateableid');
+    var stype = 'Gallery';
+    if (window.rating != null) {
+      $.ajax({
+        url: '/ratings/' + window.rating + '.json',
+        data: { value: value },
+        type: 'PUT'
+      });
+    } else {
+      $.ajax({
+        url: '/ratings.json',
+        data: { id: rateableID, value: value, stype: stype, rid: window.rater,
+                rtype: 'User' },
+        type: 'POST',
+        success: function(data) {
+          window.rating = data['id'];
+          ri.rateit('resetable', true);
+        }
+      });
+    }
+  });
 });
