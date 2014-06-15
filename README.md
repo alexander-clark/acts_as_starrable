@@ -15,6 +15,15 @@ Ratings can be added to a model as follows:
       acts_as_starrable
     end
 
+Add the javascripts to your application.js
+
+    //= require jquery.rateit.min
+    //= require starrable
+
+And styles to your application.css
+
+     *= require rateit
+
 Finally, use the `stars` helper method in your view to display the partial:
 
     <%= stars(@foo) %>
