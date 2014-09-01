@@ -9,6 +9,7 @@ gemspec
 gem "jquery-rails"
 
 group :development, :test do
+  gem 'thor'
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'guard-rspec'
