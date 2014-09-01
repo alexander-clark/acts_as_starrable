@@ -15,6 +15,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'spork'
   gem 'shoulda-matchers'
+  gem 'rspec-activemodel-mocks'
 end
 
 # Declare any dependencies that are still in development here instead of in

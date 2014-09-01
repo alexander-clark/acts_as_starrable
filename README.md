@@ -1,5 +1,7 @@
 # ActsAsStarrable
 
+[![Build Status](https://travis-ci.org/alexander-clark/acts_as_starrable.svg?branch=master)](https://travis-ci.org/alexander-clark/acts_as_starrable) [![Code Climate](https://codeclimate.com/github/alexander-clark/acts_as_starrable/badges/gpa.svg)](https://codeclimate.com/github/alexander-clark/acts_as_starrable)
+
 `ActsAsStarrable` is a Rails Engine that allows you to easily add ratings (stars) to your models. Being an engine, it's a full-service add-on, providing views and controllers with sane defaults that will work for most use cases. In cases where it won't work, these can be easily overridden.
 
 To install ActsAsStarrable, add `acts_as_starrable` to your Gemfile and run `bundle install`.
